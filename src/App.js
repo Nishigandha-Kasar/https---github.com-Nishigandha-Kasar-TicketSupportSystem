@@ -9,6 +9,7 @@ import EndUserDashboard from './components/EndUserDashboard';
 import TechSupportDashboard from './components/TechSupportDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import PrivateRoute from './components/PrivateRoute'; // Assuming this is your private route component (updated for v6)
+import CreateTicketForm from './components/CreateTicketForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Routes>
-        <Route path="/" element={<EndUserRegister />} />
+        <Route path="/" element={<AdminDashboard />} />
           <Route
             exact
             path="/end-user/login"
@@ -36,6 +37,8 @@ const App = () => {
           <Route exact path="/end-user/register" element={<EndUserRegister />} />
           <>
           <Route exact path="/end-user/dashboard" element={<EndUserDashboard />} />
+          <Route exact path="/end-user/create-ticket" element={<CreateTicketForm />} />
+          
           <Route exact path="/tech-support/dashboard" element={<TechSupportDashboard />} />
           <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
         </>

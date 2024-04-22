@@ -1,7 +1,8 @@
+// Assuming this file is part of your ticket reducer
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  techSupportTickets: [
+    techSupportTickets: [ // Assuming a specific 'techSupportTickets' property
     {
       id: 1,
       title: "Issue with application login",
@@ -40,28 +41,16 @@ const initialState = {
       createdAt: "2024-04-20T10:00:00Z",
       resolvedAt: null,
     }
-  ],
-};
-
-const ticketSlice = createSlice({
-  name: 'tickets',
-  initialState,
-  reducers: {
-    createTicketSuccess(state, action) {
-      console.log(action.payload);
-      state.push(action.payload);
+    ],
+  };
+  
+  const ticketSlice = createSlice({
+    name: 'tickets',
+    initialState,
+    reducers: {
+      // No reducers needed for this scenario (assuming no ticket creation/update/deletion)
     },
-    updateTicket(state, action) {
-      const updatedTicketIndex = state.findIndex(ticket => ticket.id === action.payload.id);
-      if (updatedTicketIndex !== -1) {
-        state[updatedTicketIndex] = { ...state[updatedTicketIndex], ...action.payload.updates };
-      }
-    },
-    deleteTicket(state, action) {
-      state = state.filter(ticket => ticket.id !== action.payload.id);
-    },
-  },
-});
-
-export const { createTicketSuccess, updateTicket, deleteTicket } = ticketSlice.actions;
-export default ticketSlice.reducer;
+  });
+  
+  export default ticketSlice.reducer;
+  

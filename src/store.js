@@ -1,9 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers'; // Import your root reducer
+import rootReducer from './reducers'; // Import the combined reducer
 
-const store = configureStore({
+const initialState = {
+  auth: {
+    user: null,
+    loading: false,
+    error: null,
+  },
+  // Other state slices if applicable
+};
+
+export default configureStore({
   reducer: rootReducer,
-  // Add any middleware or enhancers here
+  preloadedState: initialState,
 });
-
-export default store;

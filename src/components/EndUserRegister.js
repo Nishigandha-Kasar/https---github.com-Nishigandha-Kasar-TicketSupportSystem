@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'; // Added for error handling
 import { Link } from 'react-router-dom'; // For navigation
-import 'F:/nishi doc/techsupport_nishi/techsupport_nishi/my-app/src/EndUser.css';
+import '../styles/EndUser.css';
 const EndUserRegister = () => {
-  const [email, setEmail] = useState('');
+  const [id, setID] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const registerError = useSelector(state => state.auth.registerError); // Access error state (if applicable)
@@ -15,16 +16,20 @@ const EndUserRegister = () => {
       const response = await fetch('https://localhost:7198/api/Student_API', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ id,name, password }),
       });
 
-      if (!response.ok) {
+
+      if (response.ok) {
+        alert("Registration successful!");
+        console.log('Registration successful!');
+      } 
+      else {
+        alert("Error submitting data");
         throw new Error(`Registration failed: ${response.statusText}`);
       }
-
-      const data = await response.json();
-      // Handle successful registration (e.g., redirect, display success message)
-      console.log('Registration successful!');
+     
+     
     } catch (error) {
       console.error('Registration error:', error);
       // Set registerError state with an informative error message (if using Redux)
@@ -36,15 +41,27 @@ const EndUserRegister = () => {
       <div className="register-form-wrapper">
         <h2>End User Registration</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+        <div className="form-group">
+        <label htmlFor="id">ID</label>
             <input
-              type="email"
+              type="text"
               className="form-control"
-              id="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="id"
+              placeholder="Enter ID"
+              value={id}
+              onChange={(e) => setID(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="Name">User Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="text"
+              placeholder="Enter User Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
