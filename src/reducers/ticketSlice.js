@@ -53,4 +53,8 @@ const initialState = {
   });
   
   export default ticketSlice.reducer;
+<<<<<<< HEAD
   
+=======
+  
+>>>>>>> 50b3860ffae9f31099c63a790d50beb60b418406

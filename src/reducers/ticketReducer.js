@@ -64,4 +64,8 @@ const ticketSlice = createSlice({
 });
 
 export const { createTicketSuccess, updateTicket, deleteTicket } = ticketSlice.actions;
+<<<<<<< HEAD
 export default ticketSlice.reducer;
+=======
+export default ticketSlice.reducer;
+>>>>>>> 50b3860ffae9f31099c63a790d50beb60b418406
