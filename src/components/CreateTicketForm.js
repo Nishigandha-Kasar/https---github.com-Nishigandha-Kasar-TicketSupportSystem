@@ -83,7 +83,3 @@ const CreateTicketForm = () => {
 };
 
 export default CreateTicketForm;
-<<<<<<< HEAD
-=======
-
->>>>>>> 50b3860ffae9f31099c63a790d50beb60b418406
