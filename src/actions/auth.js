@@ -6,7 +6,7 @@ const initialState = {
   user: {
     "id": 1,
     "name": "admin",    
-    "password": "123"
+    "password": "123456"
   },
   loading: false,
   error: null,
