@@ -42,17 +42,19 @@ const EndUserLogin = () => {
       
       //const authorizationHeader = data.get('username');
      
-      if (data != null) {
-        dispatch(loginUser(data)); // Admin login - dispatch action and redirect
-        console.log('Admin Login successful!', data);
-        navigate('/admin/dashboard'); // Redirect to admin dashboard
+      if (data !== null) {
+        dispatch(loginUser(data)); // Dispatch login action and redirect
+
+        if (data.role === 'admin') {
+          console.log('Admin Login successful!', data);
+          navigate('/admin/admin-dashboard'); // Redirect to admin dashboard
+        } else {
+          console.log('Login successful!', data);
+          navigate('/end-user/dashboard'); // Redirect to end-ser-dashboard for non-admin users (corrected path)
+        }
       }
-      else {
-        dispatch(loginUser(data)); // Regular user login - dispatch action and redirect
-        console.log('Login successful!', data);
-        navigate('/end-user/dashboard'); // Redirect to user dashboard
-      }
-    } catch (error) {
+    }
+      catch (error) {
       console.error('Login error:', error);
       // Display error message (optional)
     }
