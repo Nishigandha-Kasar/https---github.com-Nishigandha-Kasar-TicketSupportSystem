@@ -18,8 +18,4 @@ export const createTicket = async (ticketData) => {
     // const data = await response.json();
     // return data; // Assuming the API returns the created ticket object
   };
-<<<<<<< HEAD
   
-=======
-  
->>>>>>> 50b3860ffae9f31099c63a790d50beb60b418406
