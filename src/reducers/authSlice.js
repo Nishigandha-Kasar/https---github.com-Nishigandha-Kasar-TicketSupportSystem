@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Define initial state for auth slice
 const initialState = {
   user: null,
+  token: null,
   loading: false,
   error: null,
 };
@@ -12,8 +12,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      const { username, password } = action.payload; // Assuming credentials are passed in the action payload
-      state.loading = true; // Set loading state to indicate ongoing login
+      const { username, password } = action.payload;
+      state.loading = true;
 
       fetch('https://localhost:7198/api/Student_API/login', {
         method: 'POST',
@@ -28,17 +28,23 @@ const authSlice = createSlice({
         })
         .then((data) => {
           state.loading = false;
-          state.user = data; // Update user state with received data
-          alert('Login successful!'); // Display success alert
+          const token = response.headers.get('Authorization'); // Extract token from headers
+          const userRole = data?.role; // Extract user role from data (if applicable)
+
+          state.user = { role: userRole }; // Update user object
+          state.token = token;
+          console.log('Login successful!', data);
+          console.log('Authorization token:', token);
         })
         .catch((error) => {
           state.loading = false;
           state.error = error.message || 'Login failed';
-          alert('Login failed: ' + error.message); // Display error alert with details
+          console.error('Login error:', error);
         });
     },
     logout(state) {
       state.user = null;
+      state.token = null;
     },
   },
 });
@@ -46,7 +52,3 @@ const authSlice = createSlice({
 export const { login, logout } = authSlice.actions;
 
 export default authSlice.reducer;
-<<<<<<< HEAD
-=======
-
->>>>>>> 50b3860ffae9f31099c63a790d50beb60b418406
