@@ -1,23 +1,22 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+const ProtectedRoute = ({ children, redirectTo }) => {
+  const token = useSelector((state) => state.auth.token);
+  const userRole = useSelector((state) => state.auth.user?.role);
 
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/end-user/login" replace />
-        )
-      }
-    />
-  );
+  if (!token) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
+  if (userRole === 'admin' && children.type.displayName === 'AdminDashboard') {
+    return children; // Render AdminDashboard for admin role
+  } else if (children.type.displayName === 'EndUserDashboard') {
+    return children; // Render EndUserDashboard for other roles
+  }
+
+  return <Navigate to={redirectTo} replace />; // Redirect if not authorized
 };
 
-export default PrivateRoute;
+export default ProtectedRoute;
